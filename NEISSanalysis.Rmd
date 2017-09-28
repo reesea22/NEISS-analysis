@@ -45,5 +45,10 @@ n6yoM<- with(dat, age==6 & male & #with says take this data frame and if you don
 There were `r n6yoM` 6yo males who were captured in the NEISS dataset in `r year`.
 
 # Females
+```{r females, echo=FALSE}
+n6yoF<- filter(dat, age==6 & !male & 
+                 body_part %in% c(33,80))[[1]] %>% length()
+```
+There were `r n6yoF` 6yo males who were captured in the NEISS dataset in `r year`.
 
 # Discussion
