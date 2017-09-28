@@ -1,0 +1,30 @@
+---
+title: "NEISS Analysis"
+author: "BIFX 552 class"
+date: "9/28/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(readxl)
+
+# Read in NEISS data
+dat <- read_excel('~/data/NEISS-data-2016-updated-APRIL2017.xlsx') %>%
+       mutate(age = ifelse(age > 200, (age - 200) / 12, age), # age > 200 is coded in months since birth + 200
+              male = ifelse(sex > 0, sex == 1, NA)) # 1 = Male, 2 = Female, 0 = Unknown
+```
+
+# NEISS Analysis
+
+This is an example html file that was generated from R. This data set comes from the [Consumer Product Safety Commission](https://www.cpsc.gov/Research--Statistics), and contains data from the National Electronic Injury Surveillance System (NEISS). For more information on codes, see the [NEISS Coding Manual](https://www.cpsc.gov/s3fs-public/2017NEISSCodingManualCPSConlyNontrauma.pdf). It is important to note, for example, that a child aged nine months will have an age code of 209. You might find some of the ages suspicious if you didn't know that.
+
+## 6-year-olds with arm injuries
+
+# Males
+
+# Females
+
+# Discussion
