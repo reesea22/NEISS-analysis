@@ -11,8 +11,10 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(readxl)
 
+year<-2016
+
 # Read in NEISS data
-dat <- read_excel('~/data/NEISS-data-2016-updated-APRIL2017.xlsx') %>%
+dat <- read_excel('../Data/NEISS-data-2016-updated-APRIL2017.xlsx') %>%
        mutate(age = ifelse(age > 200, (age - 200) / 12, age), # age > 200 is coded in months since birth + 200
               male = ifelse(sex > 0, sex == 1, NA)) # 1 = Male, 2 = Female, 0 = Unknown
 ```
@@ -23,7 +25,24 @@ This is an example html file that was generated from R. This data set comes from
 
 ## 6-year-olds with arm injuries
 
+
 # Males
+```{r males, echo=FALSE}
+#echo=FALSE means that none of this code will show in the final product
+n6yoM<- {filter(dat, age==6 & male & 
+                 body_part %in% c(33, 80)) %>% #%in% means look in body_part for either 33 or 80 
+      dim()}[1] #run everything between the curly braces then give us the number of rows
+
+#this is another way of doing the same thing
+n6yoM<- filter(dat, age==6 & male & 
+                 body_part %in% c(33,80))[[1]] %>% length() #[[1]] this indexes and grabs the first column of the data frame dat, doesn't matter which column b/c we just need to know the length of it.
+
+#yet another way of doing the same thing
+n6yoM<- with(dat, age==6 & male & #with says take this data frame and if you don't recognize the variable name, look within the data frame.
+                 body_part %in% c(33, 80)) %>% sum()
+
+```
+There were `r n6yoM` 6yo males who were captured in the NEISS dataset in `r year`.
 
 # Females
 
