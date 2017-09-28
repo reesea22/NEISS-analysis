@@ -51,4 +51,9 @@ n6yoF<- filter(dat, age==6 & !male &
 ```
 There were `r n6yoF` 6yo males who were captured in the NEISS dataset in `r year`.
 
+```{r females, echo=FALSE}
+n6yoF <- with(dat, age==6 & !male & 
+                 body_part %in% c(33, 80)) %>% sum()
+```
+There were `r n6yoF` 6yo females who were captured in the NEISS dataset in `r year`.
 # Discussion
